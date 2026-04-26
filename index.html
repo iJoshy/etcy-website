@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Etcy Systems — Technology Advisory & Consulting</title>
+  <meta name="description" content="Etcy Systems delivers enterprise technology strategy, AI transformation, and digital innovation for governments and world-class organisations."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    /* ═══════════════════════════════════════════
+       TOKENS & THEME
+    ═══════════════════════════════════════════ */
+    :root {
+      --bg:            #f9f8f6;
+      --bg-2:          #f2f0ec;
+      --bg-card:       #ffffff;
+      --fg:            #0c0c0b;
+      --fg-2:          #3a3a38;
+      --fg-muted:      #7a7a78;
+      --accent:        #1a1a18;
+      --accent-gold:   #c9a84c;
+      --accent-gold-2: #e8c97a;
+      --border:        rgba(0,0,0,0.09);
+      --border-strong: rgba(0,0,0,0.18);
+      --shadow-sm:     0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-md:     0 4px 24px rgba(0,0,0,0.08), 0 12px 48px rgba(0,0,0,0.06);
+      --shadow-lg:     0 8px 40px rgba(0,0,0,0.10), 0 24px 80px rgba(0,0,0,0.08);
+      --nav-bg:        rgba(249,248,246,0.85);
+      --radius:        12px;
+      --radius-lg:     20px;
+      --transition:    0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    [data-theme="dark"] {
+      --bg:            #0a0a09;
+      --bg-2:          #111110;
+      --bg-card:       #161614;
+      --fg:            #f0ede8;
+      --fg-2:          #c8c4bc;
+      --fg-muted:      #6a6a68;
+      --accent:        #f0ede8;
+      --border:        rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.14);
+      --shadow-sm:     0 1px 4px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+      --shadow-md:     0 4px 24px rgba(0,0,0,0.5), 0 12px 48px rgba(0,0,0,0.4);
+      --shadow-lg:     0 8px 40px rgba(0,0,0,0.6), 0 24px 80px rgba(0,0,0,0.5);
+      --nav-bg:        rgba(10,10,9,0.85);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ═══════════════════════════════════════════
+       TYPOGRAPHY
+    ═══════════════════════════════════════════ */
+    .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+    h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 300; font-family: 'Cormorant Garamond', serif; }
+    h2 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; font-family: 'Cormorant Garamond', serif; }
+    h3 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.01em; font-family: 'DM Sans', sans-serif; }
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       LAYOUT HELPERS
+    ═══════════════════════════════════════════ */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+    .container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 7rem 0; }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+    }
+    .nav-logo span { color: var(--accent-gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--fg-2);
+      transition: color 0.25s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      background: var(--fg);
+      color: var(--bg) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      transition: opacity 0.25s, transform 0.25s !important;
+    }
+    .nav-cta:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 1.5px;
+      background: var(--fg);
+      transition: all 0.3s;
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.5;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+      top: -100px; right: -150px;
+      animation: pulse-glow 8s ease-in-out infinite;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
+      bottom: 50px; left: -100px;
+      animation: pulse-glow 10s ease-in-out infinite reverse;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1) translate(0,0); }
+      50% { transform: scale(1.15) translate(20px, -20px); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      padding-top: 120px;
+    }
+    .hero-eyebrow {
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fade-up 0.9s 0.2s forwards;
+    }
+    .hero-title {
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fade-up 0.9s 0.4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--fg-2);
+      max-width: 560px;
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fade-up 0.9s 0.6s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fade-up 0.9s 0.8s forwards;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .btn-secondary {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--fg-2);
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.25s;
+    }
+    .btn-secondary:hover { color: var(--fg); }
+    .btn-secondary svg { transition: transform 0.25s; }
+    .btn-secondary:hover svg { transform: translateX(4px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fade-up 0.9s 1s forwards;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--fg);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent-gold); }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════
+       CLIENTS / TRUSTED BY
+    ═══════════════════════════════════════════ */
+    #trusted {
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    .trusted-inner {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trusted-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .trusted-logos {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .trusted-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    .trusted-logo:hover { color: var(--fg); }
+
+    /* ═══════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════ */
+    #services { background: var(--bg); }
+    .section-header { margin-bottom: 5rem; }
+    .section-header .eyebrow { margin-bottom: 1rem; }
+    .section-header h2 { max-width: 580px; }
+    .section-header p {
+      margin-top: 1.2rem;
+      color: var(--fg-2);
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 500px;
+      line-height: 1.75;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border-strong);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--bg-card);
+      padding: 2.8rem 2.5rem;
+      transition: background var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-card:hover { background: var(--bg-2); }
+    .service-icon {
+      width: 44px; height: 44px;
+      margin-bottom: 1.8rem;
+      color: var(--accent-gold);
+    }
+    .service-card h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .service-card p {
+      color: var(--fg-2);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .service-tag {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+    }
+
+    /* ═══════════════════════════════════════════
+       ABOUT / PRINCIPAL
+    ═══════════════════════════════════════════ */
+    #about { background: var(--bg-2); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-photo-frame {
+      position: relative;
+      aspect-ratio: 4/5;
+      max-width: 440px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+    .about-photo-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #1a1a18 0%, #2d2a24 40%, #1a1a18 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .about-badge-label {
+      font-size: 0.72rem;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+    .about-badge-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    .about-decor-line {
+      position: absolute;
+      top: 2rem; left: -2rem;
+      width: 1px; height: calc(100% - 4rem);
+      background: linear-gradient(to bottom, transparent, var(--accent-gold), transparent);
+      opacity: 0.4;
+    }
+
+    .about-content {}
+    .about-content .eyebrow { margin-bottom: 1rem; }
+    .about-content h2 { margin-bottom: 1.5rem; }
+    .about-content p {
+      color: var(--fg-2);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .about-creds {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .cred-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .cred-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+    .cred-text {
+      font-size: 0.9rem;
+      color: var(--fg-2);
+      line-height: 1.5;
+    }
+    .cred-text strong { color: var(--fg); font-weight: 500; }
+
+    /* ═══════════════════════════════════════════
+       APPROACH
+    ═══════════════════════════════════════════ */
+    #approach { background: var(--bg); }
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .approach-sticky {
+      position: sticky;
+      top: 8rem;
+    }
+    .approach-steps { display: flex; flex-direction: column; gap: 0; }
+    .approach-step {
+      display: flex;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .approach-step:first-child { padding-top: 0; }
+    .approach-step:hover .step-num { color: var(--accent-gold); }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1;
+      min-width: 3rem;
+      transition: color 0.3s;
+    }
+    .step-content {}
+    .step-content h3 { margin-bottom: 0.6rem; font-size: 1.1rem; }
+    .step-content p { color: var(--fg-2); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
+
+    /* ═══════════════════════════════════════════
+       IMPACT / NUMBERS
+    ═══════════════════════════════════════════ */
+    #impact {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 7rem 0;
+    }
+    [data-theme="dark"] #impact { background: var(--bg-card); color: var(--fg); }
+    .impact-inner {
+      text-align: center;
+    }
+    #impact .eyebrow { color: var(--accent-gold); margin-bottom: 1rem; }
+    #impact h2 { color: inherit; margin-bottom: 4rem; }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+    .impact-stat {
+      padding: 3rem 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      transition: all 0.3s;
+    }
+    [data-theme="dark"] .impact-stat { border-color: var(--border); }
+    .impact-stat:hover { background: rgba(255,255,255,0.04); transform: translateY(-4px); }
+    .impact-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+    .impact-label {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      opacity: 0.55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTORS
+    ═══════════════════════════════════════════ */
+    #sectors { background: var(--bg-2); }
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .sector-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .sector-pill:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .sector-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .sector-name { font-size: 0.85rem; font-weight: 500; color: var(--fg-2); }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIAL
+    ═══════════════════════════════════════════ */
+    #testimonial { background: var(--bg); }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 4rem;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      line-height: 1;
+      color: var(--accent-gold);
+      opacity: 0.2;
+      position: absolute;
+      top: 1rem; left: 3rem;
+      font-weight: 300;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--fg);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2rem;
+    }
+    .testimonial-attr {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .attr-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold), #8b6914);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+    }
+    .attr-name { font-weight: 500; font-size: 0.9rem; }
+    .attr-role { font-size: 0.8rem; color: var(--fg-muted); }
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    #contact { background: var(--bg-2); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 1.5rem; }
+    .contact-info p { color: var(--fg-2); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--fg-2);
+      font-size: 0.9rem;
+      transition: color 0.25s;
+    }
+    .contact-link:hover { color: var(--fg); }
+    .contact-link svg { color: var(--accent-gold); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field label { font-size: 0.78rem; font-weight: 500; color: var(--fg-2); letter-spacing: 0.05em; text-transform: uppercase; }
+    .form-field input, .form-field textarea, .form-field select {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .form-field textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      background: var(--fg);
+      color: var(--bg);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      align-self: flex-start;
+      letter-spacing: 0.01em;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); opacity: 0.85; }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: var(--fg);
+      color: var(--bg);
+      padding: 4rem 0 2rem;
+      transition: background var(--transition), color var(--transition);
+    }
+    [data-theme="dark"] footer { background: #050504; }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 4rem;
+      flex-wrap: wrap;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 2rem;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: inherit;
+      margin-bottom: 0.8rem;
+    }
+    .footer-logo span { color: var(--accent-gold); }
+    .footer-tagline { font-size: 0.82rem; opacity: 0.45; max-width: 220px; line-height: 1.6; }
+    .footer-links-group { display: flex; gap: 5rem; flex-wrap: wrap; }
+    .footer-col h4 { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.4; margin-bottom: 1.2rem; font-weight: 500; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-col ul a { font-size: 0.85rem; opacity: 0.6; transition: opacity 0.25s; }
+    .footer-col ul a:hover { opacity: 1; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: 0.78rem; opacity: 0.35; }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; opacity: 0.35; transition: opacity 0.25s; }
+    .footer-legal a:hover { opacity: 0.7; }
+
+    /* ═══════════════════════════════════════════
+       THEME TOGGLE
+    ═══════════════════════════════════════════ */
+    #theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: var(--fg);
+    }
+    #theme-toggle:hover { transform: scale(1.08); box-shadow: var(--shadow-lg); }
+    .toggle-icon-sun, .toggle-icon-moon { position: absolute; transition: all 0.35s; }
+    [data-theme="light"] .toggle-icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+    [data-theme="dark"] .toggle-icon-sun  { opacity: 0; transform: rotate(90deg) scale(0.6); }
+    [data-theme="light"] .toggle-icon-sun  { opacity: 1; transform: rotate(0) scale(1); }
+    [data-theme="dark"] .toggle-icon-moon  { opacity: 1; transform: rotate(0) scale(1); }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════════════════
+       MOBILE NAV
+    ═══════════════════════════════════════════ */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 2rem;
+      flex-direction: column;
+      gap: 1.5rem;
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .mobile-nav.open { transform: translateY(0); }
+    .mobile-nav a { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; color: var(--fg); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+      .approach-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .approach-sticky { position: relative; top: 0; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 5rem 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { flex-direction: column; gap: 2rem; }
+      .footer-links-group { gap: 2rem; }
+      .about-badge { right: 0; bottom: -3rem; }
+      .testimonial-card { padding: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 1.25rem; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">ETCY<span>.</span>SYSTEMS</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#sectors">Sectors</a></li>
+      <li><a href="#contact" class="nav-cta">Engage Us →</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#approach" class="mob-link">Approach</a>
+  <a href="#sectors" class="mob-link">Sectors</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- ══ HERO ════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+  </div>
+  <div class="hero-content">
+    <p class="eyebrow hero-eyebrow">Technology Advisory · Lagos &amp; Global</p>
+    <h1 class="hero-title">
+      Where <em>visionary</em><br/>
+      strategy meets<br/>
+      engineering precision.
+    </h1>
+    <p class="hero-subtitle">
+      Etcy Systems partners with governments, financial institutions, and growth-stage organisations to architect technology that is built to endure.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Begin a conversation
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-secondary">
+        Explore our services
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">15<span>+</span></div>
+        <div class="stat-label">Years of excellence</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40<span>+</span></div>
+        <div class="stat-label">Enterprise deployments</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">₦<span>bn</span></div>
+        <div class="stat-label">Value delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-label">Sectors served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUSTED BY ══════════════════════════════ -->
+<div id="trusted">
+  <div class="container">
+    <div class="trusted-inner">
+      <span class="trusted-label">Trusted by institutions across</span>
+      <div class="trusted-logos">
+        <span class="trusted-logo">Financial Services</span>
+        <span class="trusted-logo">Telecommunications</span>
+        <span class="trusted-logo">Public Sector</span>
+        <span class="trusted-logo">Healthcare</span>
+        <span class="trusted-logo">Energy &amp; Utilities</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">What we do</p>
+      <h2>Advisory built for<br/>consequential decisions.</h2>
+      <p>We bring deep technical authority and strategic clarity to the challenges that matter most for your organisation.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <h3>Technology Strategy &amp; Advisory</h3>
+        <p>Board-level counsel on digital transformation, IT architecture, and technology roadmaps aligned to your institutional goals.</p>
+        <span class="service-tag">Strategic</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        <h3>AI &amp; Intelligent Automation</h3>
+        <p>Practical AI implementations — from machine learning pipelines to generative AI platforms — that deliver measurable business outcomes.</p>
+        <span class="service-tag">Innovation</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+        </svg>
+        <h3>Cloud &amp; Infrastructure Architecture</h3>
+        <p>Google Cloud, multi-cloud, and hybrid infrastructure design with enterprise-grade security, compliance, and cost optimisation.</p>
+        <span class="service-tag">Infrastructure</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <path d="M2 10h20"/>
+        </svg>
+        <h3>Fintech &amp; Digital Payments</h3>
+        <p>End-to-end design and delivery of payment platforms, POS/EMV systems, digital banking products, and regulatory-compliant financial infrastructure.</p>
+        <span class="service-tag">Fintech</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <h3>Government Technology (GovTech)</h3>
+        <p>Citizen-centric digital services, e-government platforms, and public sector transformation that improves service delivery at scale.</p>
+        <span class="service-tag">Public Sector</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+        <h3>CTO-as-a-Service &amp; Fractional Leadership</h3>
+        <p>Senior technology leadership on demand — embedded strategic guidance for startups, growth-stage firms, and public institutions.</p>
+        <span class="service-tag">Leadership</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-decor-line"></div>
+        <div class="about-photo-frame">
+          <div class="about-photo-inner">
+            <div class="about-initials">JB</div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-label">Google Certified</div>
+          <div class="about-badge-val">Cloud Architect</div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <p class="eyebrow">The Principal</p>
+        <h2>Joshua Balogun</h2>
+        <p>Joshua is a technology leader with over 15 years of experience architecting enterprise-scale systems across fintech, telecommunications, and the public sector. He founded Etcy Systems to bring senior engineering rigour and strategic clarity to organisations navigating consequential digital decisions.</p>
+        <p>His career spans landmark digital deployments — from Nigeria's first mobile self-care applications for Etisalat, to complex payment infrastructure at eTranzact, to enterprise financial platforms at SystemSpecs. He holds a Master of Science in Computer Science from Georgia Institute of Technology and a degree in Computer Engineering from Covenant University.</p>
+        <p>His mission is direct: <em>"World Impact with Code."</em></p>
+        <div class="about-creds">
+          <div class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text"><strong>M.Sc. Computer Science</strong> — Georgia Institute of Technology</div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text"><strong>Google Professional Cloud Architect</strong> — Certified</div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text"><strong>Sun Certified Java Programmer &amp; Web Component Developer</strong></div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">Former senior roles at <strong>SystemSpecs, Etisalat Nigeria, eTranzact</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPROACH ═════════════════════════════════ -->
+<section id="approach">
+  <div class="container">
+    <div class="approach-grid">
+      <div class="approach-sticky">
+        <p class="eyebrow reveal">Our Method</p>
+        <h2 class="reveal reveal-delay-1">A deliberate process.<br/>Measurable results.</h2>
+        <p class="reveal reveal-delay-2" style="color:var(--fg-2);font-weight:300;font-size:1rem;line-height:1.8;margin-top:1.2rem;">Every engagement begins with listening. We immerse ourselves in your context before prescribing direction.</p>
+      </div>
+      <div class="approach-steps">
+        <div class="approach-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3>Discovery &amp; Diagnosis</h3>
+            <p>We audit your current technology landscape, understand your strategic ambitions, and identify gaps between where you are and where you need to be.</p>
+          </div>
+        </div>
+        <div class="approach-step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3>Strategy &amp; Architecture Design</h3>
+            <p>We produce a clear, actionable technology blueprint — scoped, costed, and aligned to your regulatory environment and institutional constraints.</p>
+          </div>
+        </div>
+        <div class="approach-step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3>Delivery &amp; Implementation</h3>
+            <p>Where engaged, we lead delivery with rigorous engineering standards, lean development practices, and transparent progress governance.</p>
+          </div>
+        </div>
+        <div class="approach-step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3>Optimise &amp; Scale</h3>
+            <p>We embed observability, performance tracking, and continuous improvement cycles so your systems grow with your ambitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IMPACT ═══════════════════════════════════ -->
+<section id="impact">
+  <div class="container">
+    <div class="impact-inner">
+      <p class="eyebrow">Track Record</p>
+      <h2 class="reveal">Numbers that matter.</h2>
+      <div class="impact-grid">
+        <div class="impact-stat reveal">
+          <div class="impact-num">15+</div>
+          <div class="impact-label">Years delivering enterprise solutions</div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-1">
+          <div class="impact-num">5M+</div>
+          <div class="impact-label">End users served through built systems</div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-2">
+          <div class="impact-num">99.9%</div>
+          <div class="impact-label">Uptime SLA on mission-critical platforms</div>
+        </div>
+        <div class="impact-stat reveal reveal-delay-3">
+          <div class="impact-num">12+</div>
+          <div class="impact-label">Enterprise organisations transformed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTORS ══════════════════════════════════ -->
+<section id="sectors">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Industries</p>
+      <h2>Expertise across sectors<br/>that shape society.</h2>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-pill reveal">
+        <div class="sector-icon">🏛️</div>
+        <div class="sector-name">Government &amp; Public Sector</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-1">
+        <div class="sector-icon">🏦</div>
+        <div class="sector-name">Banking &amp; Financial Services</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-2">
+        <div class="sector-icon">📡</div>
+        <div class="sector-name">Telecommunications</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-3">
+        <div class="sector-icon">⚡</div>
+        <div class="sector-name">Energy &amp; Utilities</div>
+      </div>
+      <div class="sector-pill reveal">
+        <div class="sector-icon">🏥</div>
+        <div class="sector-name">Healthcare &amp; Life Sciences</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-1">
+        <div class="sector-icon">🎓</div>
+        <div class="sector-name">Education &amp; Research</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-2">
+        <div class="sector-icon">🛒</div>
+        <div class="sector-name">Retail &amp; E-Commerce</div>
+      </div>
+      <div class="sector-pill reveal reveal-delay-3">
+        <div class="sector-icon">🚀</div>
+        <div class="sector-name">Startups &amp; Scale-ups</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIAL ══════════════════════════════ -->
+<section id="testimonial">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;margin-bottom:3rem;">
+      <p class="eyebrow">Testimonial</p>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">"Joshua Balogun is a Software Engineer with an influence. His passion for his job and drive towards perfection can only be compared to that of Steve Jobs."</p>
+      <div class="testimonial-attr">
+        <div class="attr-avatar">EC</div>
+        <div>
+          <div class="attr-name">Engineering Colleague</div>
+          <div class="attr-role">Former collaborator, Lagos Tech Industry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow" style="margin-bottom:1rem;">Get in touch</p>
+        <h2>Let's build something<br/>significant together.</h2>
+        <p>Whether you are a government ministry, a financial institution, or a growth-stage organisation, we welcome a conversation about your technology ambitions.</p>
+        <div class="contact-links">
+          <a href="mailto:hello@etcy.systems" class="contact-link">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            hello@etcy.systems
+          </a>
+          <a href="https://linkedin.com/in/joshuabalogun" target="_blank" class="contact-link">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/joshuabalogun
+          </a>
+          <a href="https://etcy.systems" class="contact-link">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            etcy.systems
+          </a>
+          <span class="contact-link" style="cursor:default;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Lagos, Nigeria · Serving globally
+          </span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required/>
+            </div>
+            <div class="form-field">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith"/>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Organisation</label>
+            <input type="text" placeholder="Your institution or company"/>
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" placeholder="you@organisation.com" required/>
+          </div>
+          <div class="form-field">
+            <label>Area of Interest</label>
+            <select>
+              <option value="">Select a service area</option>
+              <option>Technology Strategy &amp; Advisory</option>
+              <option>AI &amp; Intelligent Automation</option>
+              <option>Cloud &amp; Infrastructure</option>
+              <option>Fintech &amp; Digital Payments</option>
+              <option>Government Technology</option>
+              <option>CTO-as-a-Service</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Message</label>
+            <textarea placeholder="Tell us briefly about your organisation and what you'd like to explore…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">ETCY<span>.</span>SYSTEMS</div>
+        <div class="footer-tagline">Where visionary strategy meets engineering precision.</div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Technology Strategy</a></li>
+            <li><a href="#services">AI &amp; Automation</a></li>
+            <li><a href="#services">Cloud Architecture</a></li>
+            <li><a href="#services">Fintech Solutions</a></li>
+            <li><a href="#services">GovTech</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#approach">Our Approach</a></li>
+            <li><a href="#sectors">Sectors</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://linkedin.com/in/joshuabalogun" target="_blank">LinkedIn</a></li>
+            <li><a href="mailto:hello@etcy.systems">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Etcy Systems Limited. All rights reserved. Registered in Nigeria.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ THEME TOGGLE ══════════════════════════════ -->
+<button id="theme-toggle" aria-label="Toggle theme">
+  <!-- Sun icon -->
+  <svg class="toggle-icon-sun" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5"/>
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+  </svg>
+  <!-- Moon icon -->
+  <svg class="toggle-icon-moon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+  </svg>
+</button>
+
+<script>
+  /* ── Theme ── */
+  const html = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('etcy-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('etcy-theme', next);
+  });
+
+  /* ── Mobile nav ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(l => {
+    l.addEventListener('click', () => mobileNav.classList.remove('open'));
+  });
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Contact form ── */
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Message sent ✓';
+    btn.style.background = '#2a7a4a';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send message →';
+      btn.style.background = '';
+      btn.style.color = '';
+      this.reset();
+    }, 3000);
+  });
+
+  /* ── Nav shrink on scroll ── */
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.borderBottomColor = 'var(--border-strong)';
+    } else {
+      nav.style.borderBottomColor = 'var(--border)';
+    }
+  });
+</script>
+</body>
+</html>
