@@ -1,0 +1,123 @@
+# Node
+node_modules/
+.next/
+out/
+.vercel/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env files
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Terraform variables (secrets)
+*.tfvars
+!*.tfvars.example
+
+# Python virtual envs
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python cache / build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+backend/lib/
+backend/lib64/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# SQLite
+*.db
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+logs
+*.log.*
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Terraform
+.terraform/
+terraform.tfstate.d/
+*.tfstate
+*.tfstate.backup
+
+# Lambda
+lambda_function.zip
+backend/**/*_lambda.zip
+!backend/scheduler/lambda_function.zip
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+.coverage
+.cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+coverage/
+
+# Cursor
+.cursorignore
+.cursorindexingignore
+
+# Marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# Local sample archives and fixtures (stay on your machine only)
+samples/
+
+# Frontend build outputs (repo-root Node section covers root `.next/` / `out/`)
+frontend/.next/
+frontend/out/
+
+# infra/terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
