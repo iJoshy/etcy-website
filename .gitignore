@@ -121,3 +121,6 @@ frontend/out/
 infra/terraform/.terraform/
 infra/terraform/*.tfstate
 infra/terraform/*.tfstate.backup
+
+# claude file
+claude.md
